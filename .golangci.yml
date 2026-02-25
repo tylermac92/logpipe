@@ -1,26 +1,32 @@
-run:
-  timeout: 5m
-
+version: "2"
 linters:
+  settings:
+    errcheck:
+      check-blank: true
+    govet:
+      enable-all: true
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - errcheck
+        path: _test\.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
   enable:
-    - govet        # catches suspicious constructs the compiler misses
-    - errcheck     # ensures errors aren't silently dropped
-    - staticcheck  # comprehensive static analysis
-    - gosimple     # suggests simpler code patterns
-    - ineffassign  # catches assignments whose values are never used
-    - unused       # finds unused code
-    - gofmt        # enforces standard formatting
-    - goimports    # enforces import grouping/ordering
-
-linters-settings:
-  govet:
-    enable-all: true
-  errcheck:
-    check-blank: true  # catches `_ = someFunc()` error suppression
-
-issues:
-  exclude-rules:
-    # Test files get a pass on some strict rules
-    - path: "_test\\.go"
-      linters:
-        - errcheck
+    - gofmt
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
