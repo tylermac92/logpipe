@@ -38,6 +38,8 @@ func (m *multiFlag) Set(value string) error {
 }
 
 func main() {
+	var version = "dev"
+
 	// --- Flag definitions ---
 	var (
 		format      = flag.String("format", "text", "Output format: text or json")
@@ -47,10 +49,16 @@ func main() {
 		pretty      = flag.Bool("pretty", false, "Pretty-print JSON output (json format only)")
 		fields      = flag.String("fields", "", "Comma-separated list of fields to display (text format)")
 		filters     multiFlag
+		versionFlag = flag.Bool("version", false, "Print version and exit")
 	)
 
 	flag.Var(&filters, "filter", "Filter expression (e.g. level=error, time>=2024-01-01T00:00:00Z)")
 	flag.Parse()
+
+	if *versionFlag {
+		fmt.Printf("logpipe %s\n", version)
+		os.Exit(0)
+	}
 
 	// --- Input source ---
 	// Open the specified file, or fall back to stdin.
