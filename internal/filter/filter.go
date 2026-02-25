@@ -20,10 +20,10 @@ type Filter interface {
 // FieldFilter matches log entries by comparing a named field against a
 // constant value using a specific operator.
 type FieldFilter struct {
+	re       *regexp.Regexp // Compiled regex, populated only for the ~ operator.
 	Field    string         // Name of the log field to inspect.
 	Operator string         // Comparison operator (=, !=, >, <, >=, <=, ~).
 	Value    string         // The value to compare against.
-	re       *regexp.Regexp // Compiled regex, populated only for the ~ operator.
 }
 
 // NewFieldFilter parses a filter expression of the form "field<op>value" and

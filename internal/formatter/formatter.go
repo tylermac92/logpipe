@@ -51,7 +51,6 @@ const (
 	colorRed    = "\033[31m"
 	colorGreen  = "\033[32m"
 	colorYellow = "\033[33m"
-	colorCyan   = "\033[36m"  //nolint:unused
 	colorGray   = "\033[90m"
 	colorBold   = "\033[1m"
 )
@@ -65,11 +64,11 @@ const (
 // message/msg/text) are pulled out and rendered in fixed positions; all
 // remaining fields are appended as key=value pairs sorted alphabetically.
 type TextFormatter struct {
-	// Color enables ANSI terminal colours when true.
-	Color bool
 	// Fields restricts the extra key=value pairs to the named fields.
 	// When empty, all non-canonical fields are printed.
 	Fields []string
+	// Color enables ANSI terminal colours when true.
+	Color bool
 }
 
 // Format writes a formatted text representation of entry to w.

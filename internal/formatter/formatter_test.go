@@ -432,7 +432,7 @@ func TestTextFormatter_ExtrasSortedAlphabetically(t *testing.T) {
 	if aIdx == -1 || mIdx == -1 || zIdx == -1 {
 		t.Fatalf("expected all fields in output, got: %s", out)
 	}
-	if !(aIdx < mIdx && mIdx < zIdx) {
+	if aIdx >= mIdx || mIdx >= zIdx {
 		t.Errorf("fields should be sorted alphabetically (a < m < z), got: %s", out)
 	}
 }
@@ -560,7 +560,7 @@ func TestLogfmtFormatter_KeysSortedAlphabetically(t *testing.T) {
 	if aIdx == -1 || mIdx == -1 || zIdx == -1 {
 		t.Fatalf("expected all keys in output, got: %s", out)
 	}
-	if !(aIdx < mIdx && mIdx < zIdx) {
+	if aIdx >= mIdx || mIdx >= zIdx {
 		t.Errorf("keys should be sorted alphabetically, got: %s", out)
 	}
 }
